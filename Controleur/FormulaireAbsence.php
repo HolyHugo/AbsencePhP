@@ -1,58 +1,31 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Absence</title>
-</head>
-<body>  
 <?php
-    try{
-	   include '/Controleur/cobdd.php';
-        }
+try
+{
+$bdd = new PDO('mysql:host=localhost;dbname=BS1;charset=utf8', 'admin', 'admin');
+	
+	
+}
+catch(Exception $e)
+{
+            die('Erreur : '.$e->getMessage());
+}
+ 
+echo'<html style="background-color:#CFFF98;">';
+echo'<h1 style="color:#7b95cd;">Ajouter une absence</h1>';
+$reponse = $bdd->query('SELECT * FROM Visiteur');
+ 
 
-    catch(Exception $e){
-        die('Erreur : '.$e->getMessage());
-    }
+
+	echo'<form action="AjoutAbsence.php" method="post">';
+	echo'<label for="nomV" style="color:#B01919;">Qui ? : </label>';
+	echo'<select name="nomV" id="idVisiteur">';
+	while ($donnees = $reponse->fetch())
+{
 ?>
-    <form action="abs_post.php" method="post">
-        <h2><strong>ABSENCES</strong></h2>
-        <p>
-            <?php
-            $bdd_nom = $bdd->query('SELECT * FROM VISITEUR');
-            
-            echo'<label for="nomV">Choisissez l\'élève : </label>';
-            
-            echo'<select name="nomV" id="nomV">';
-                while($donnees = $bdd_nom->fetch()){
-                ?>
-                <option value="<?php echo $donnees['nom']; ?>"><?php echo $donnees['nom']; ?></option>
-                <?php
-                }
-                ?>
-            </select><br />
-            <input type="submit" value="Envoyer" /> 
-        </p>
-    </form>
-
-<h3><strong>Les dernières absences :</strong></h3>
-<div>
-<?php
-$reponse = $bdd->query('SELECT id, nom, date FROM ABSENCE ORDER BY ID DESC LIMIT 0, 5');
-
-
-while ($donnees = $reponse->fetch()){
-	echo '<p><strong>' . htmlspecialchars($donnees['nom']) . 
-    ' :</strong> ' . htmlspecialchars($donnees['date']) . 
-    '</p>';
-    }
-
-$reponse->closeCursor();
-
+	<option value="<?php echo $donnees['idVisiteur']; ?>"> <?php echo $donnees['nomV']; ?></option>
+<?php  
+}
 ?>
-</div>
-    
-</body>
-
-</html>
+	</select>
+	<input type="submit" value="Envoyer"/>
+	</form>    

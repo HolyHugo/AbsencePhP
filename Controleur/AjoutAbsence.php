@@ -1,13 +1,12 @@
 <?php
-	include '/Controleur/cobbd.php';
-	
+$bdd = new PDO('mysql:host=localhost;dbname=BS1;charset=utf8', 'admin', 'admin');
 	
 	//
 	
-	$nomV = $_POST['nomV'];
-	
-	$Rins = $bdd->prepare("INSERT INTO Visiteur(nomV) VALUES (:nomV)");
+	$refid = $_POST['nomV'];
+	$Rins = $bdd->prepare("INSERT INTO Absence(refVisiteur,dateDebut) VALUES (:refid,NOW())");
 	$Rins->execute(array(
-		'nomV' => $nomV
+		'refid' => $refid
 		));
-	
+header('Location: FormulaireAbsence.php');
+
