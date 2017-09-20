@@ -23,9 +23,31 @@ $reponse = $bdd->query('SELECT * FROM Visiteur');
 {
 ?>
 	<option value="<?php echo $donnees['idVisiteur']; ?>"> <?php echo $donnees['nomV']; ?></option>
+	<?php
+	$reponse->closeCursor();
+	?>
 <?php  
 }
 ?>
 	</select>
 	<input type="submit" value="Envoyer"/>
 	</form>    
+<?php
+//Affichage des absences d'hier
+
+	echo"Absence d'hier";
+	$reponse = $bdd->query('SELECT nomV,dateDebut,refVisiteur,idVisiteur from Visiteur,Absence WHERE refVisiteur = idVisiteur AND dateDebut > DATE_SUB(CURDATE(), INTERVAL 1 DAY) and dateDebut < CURDATE()');
+	while($donnees = $reponse->fetch()){
+		echo "<p></p>";
+		echo $donnees['nomV'];
+		echo "<p></p>";
+
+		}
+	echo"Jamais Absent :";
+	$answer = $bdd->query('SELECT nomV,idVisiteur from Visiteur  Where idVisiteur NOT IN (SELECT refVisiteur from Absence)');
+	while($data = $answer->fetch()){
+		echo "<p></p>";
+		echo $data['nomV'];
+		echo "<p></p>";
+		}
+
