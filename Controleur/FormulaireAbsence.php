@@ -24,7 +24,7 @@ $reponse = $bdd->query('SELECT * FROM Visiteur');
 ?>
 	<option value="<?php echo $donnees['idVisiteur']; ?>"> <?php echo $donnees['nomV']; ?></option>
 	<?php
-	$reponse->closeCursor();
+	
 	?>
 <?php  
 }
@@ -33,6 +33,7 @@ $reponse = $bdd->query('SELECT * FROM Visiteur');
 	<input type="submit" value="Envoyer"/>
 	</form>    
 <?php
+	$reponse->closeCursor();
 //Affichage des absences d'hier
 
 	echo"Absence d'hier";
@@ -50,4 +51,5 @@ $reponse = $bdd->query('SELECT * FROM Visiteur');
 		echo $data['nomV'];
 		echo "<p></p>";
 		}
+		$reponse->closeCursor();
 
