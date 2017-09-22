@@ -3,7 +3,6 @@ try
 {
 $bdd = new PDO('mysql:host=localhost;dbname=BS1;charset=utf8', 'admin', 'admin');
 	
-	
 }
 catch(Exception $e)
 {
@@ -72,6 +71,17 @@ $reponse = $bdd->query('SELECT * FROM Visiteur');
 	while($data = $answer->fetch()){
 		echo "<p></p>";
 		echo $data['nomV'];
+		echo "<p></p>";
+		}
+		$reponse->closeCursor();
+		
+				echo"<h3>Absence pour maladie :</h3>";
+	$answer = $bdd->query('SELECT nomV,libelle,sum(nbJours) as snb from Visiteur,Absence,Motif WHERE idVisiteur = refVisiteur and idMotif = "MA" and refMotif = idMotif group by refVisiteur');
+	while($data = $answer->fetch()){
+		echo "<p></p>";
+		echo $data['nomV'];
+		echo" : ";
+		echo $data['snb'];
 		echo "<p></p>";
 		}
 		$reponse->closeCursor();
