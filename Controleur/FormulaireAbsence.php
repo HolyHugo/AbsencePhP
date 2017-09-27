@@ -11,10 +11,14 @@ catch(Exception $e)
             die('Erreur : '.$e->getMessage());
 }
  
-echo'<html style="background-color:#CFFF98;">';
-	echo'<h1 style="color:#7b95cd;">Ajouter une absence</h1>';
+echo'<html>','<header class="header">','<h1>Appsence</h1>','</div>'; 
+
+	echo'<h1>Ajouter une absence</h1>';
+	echo'<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"> </head>';
+	
+	echo'<body>';
 //Debut du formulaire 
-		echo'<form action="AjoutAbsence.php" method="post">';
+		echo'<form action="AjoutAbsence.php" style="background-color: #D08CB3;margin:2px;padding:5px;margin-right:41%;"method="post">';
 //Debut de la requete pour obtenir la liste des visiteurs		
 			echo'<label for="nomV" style="color:#B01919;">Qui ? : </label>';
 				echo'<select name="nomV" id="idVisiteur">';
@@ -48,13 +52,11 @@ echo'<html style="background-color:#CFFF98;">';
 
 
 //Affichage des absences d'hier
-
-		echo"<h3>Absence d'hier :</h3>";
+		echo"<div style='padding-left:25px;background-color: #DCE6EE;'>";
+		echo"<h3 style='color:#14535f;'>Absence d'hier :</h3>";
 			while($donnees = $reponse3->fetch())
 				{
-					echo "<p></p>";
-					echo $donnees['nomV'];
-					echo "<p></p>";
+					echo "<p>",$donnees['nomV'],"</p>";
 				}
 			$reponse3->closeCursor();
 //Affichage du visiteur jamais Absent 
@@ -62,9 +64,7 @@ echo'<html style="background-color:#CFFF98;">';
 		echo"<h3>Jamais Absent :</h3>";
 			while($data = $reponse4->fetch())
 				{
-					echo "<p></p>";
-					echo $data['nomV'];
-					echo "<p></p>";
+					echo "<p>",$data['nomV'],"</p>";
 				}
 			$reponse4->closeCursor();
 
@@ -73,21 +73,19 @@ echo'<html style="background-color:#CFFF98;">';
 		echo"<h3>Le plus Absent :</h3>";
 			while($data = $reponse5->fetch())
 				{
-					echo "<p></p>";
-					echo $data['nomV'];
-					echo "<p></p>";
+					echo "<p>",$data['nomV'],"</p>";
 				}
 				$reponse5->closeCursor();
 //Affichage des jours d'absences pour maladie
 		echo"<h3>Absence pour maladie :</h3>";
 			while($data = $reponse6->fetch())
 				{
-					echo "<p></p>";
-					echo $data['nomV'];
-					echo" : ";
-					echo $data['snb'];
-					echo "<p></p>";
+					echo "<p>",$data['nomV']," : ",$data['snb'],"</p>";
 				}
 		$reponse6->closeCursor();
+	echo'</div>';
+	echo'</body>';
+
+	echo'<footer style="position:absolute;bottom:0;width:100%;padding-left:50px;">','<h5>Mahery & Hugo</h5>','<p>Php & mysql : TP</p>','</footer>';
 
 
