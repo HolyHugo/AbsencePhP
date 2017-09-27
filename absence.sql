@@ -55,7 +55,7 @@ CREATE TABLE `Controles` (
   `refidVisiteur` int(11) NOT NULL,
   `refdateDebut` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `numero` int(11) NOT NULL,
-  `justificaion` tinyint(1) DEFAULT NULL,
+  `justification` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`refidVisiteur`,`refdateDebut`,`numero`),
   CONSTRAINT `Controles_ibfk_1` FOREIGN KEY (`refidVisiteur`, `refdateDebut`) REFERENCES `Absence` (`refVisiteur`, `dateDebut`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
