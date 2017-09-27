@@ -45,6 +45,32 @@ INSERT INTO `Absence` VALUES (1,'2017-09-20 07:38:13',2,NULL),(1,'2017-09-20 22:
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Controles`
+--
+
+DROP TABLE IF EXISTS `Controles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Controles` (
+  `refidVisiteur` int(11) NOT NULL,
+  `refdateDebut` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `numero` int(11) NOT NULL,
+  `justificaion` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`refidVisiteur`,`refdateDebut`,`numero`),
+  CONSTRAINT `Controles_ibfk_1` FOREIGN KEY (`refidVisiteur`, `refdateDebut`) REFERENCES `Absence` (`refVisiteur`, `dateDebut`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Controles`
+--
+
+LOCK TABLES `Controles` WRITE;
+/*!40000 ALTER TABLE `Controles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Controles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Temporary table structure for view `CumulAbsences`
 --
 
@@ -136,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-22 10:32:58
+-- Dump completed on 2017-09-27 15:29:57
