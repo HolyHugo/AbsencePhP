@@ -52,13 +52,14 @@ DROP TABLE IF EXISTS `Controles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Controles` (
-  `refidVisiteur` int(11) NOT NULL,
-  `refdateDebut` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `numero` int(11) NOT NULL,
+  `abVisiteur` int(11) NOT NULL,
+  `abdateDebut` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `numero` int(11) NOT NULL AUTO_INCREMENT,
   `justification` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`refidVisiteur`,`refdateDebut`,`numero`),
-  CONSTRAINT `Controles_ibfk_1` FOREIGN KEY (`refidVisiteur`, `refdateDebut`) REFERENCES `Absence` (`refVisiteur`, `dateDebut`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`abVisiteur`,`abdateDebut`,`numero`),
+  KEY `numero` (`numero`),
+  CONSTRAINT `Controles_ibfk_3` FOREIGN KEY (`abVisiteur`, `abdateDebut`) REFERENCES `Absence` (`refVisiteur`, `dateDebut`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +68,7 @@ CREATE TABLE `Controles` (
 
 LOCK TABLES `Controles` WRITE;
 /*!40000 ALTER TABLE `Controles` DISABLE KEYS */;
+INSERT INTO `Controles` VALUES (1,'2017-09-20 07:38:13',1,0),(1,'2017-09-20 07:38:13',2,0),(1,'2017-09-20 07:38:13',3,0),(1,'2017-09-20 07:38:13',4,0),(1,'2017-09-20 07:38:13',5,0);
 /*!40000 ALTER TABLE `Controles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-27 15:29:57
+-- Dump completed on 2017-09-27 16:53:43
